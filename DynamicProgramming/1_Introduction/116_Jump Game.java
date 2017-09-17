@@ -22,3 +22,4 @@ public class Solution {
         return dp[A.length - 1];
     }
 }
+O(n)
