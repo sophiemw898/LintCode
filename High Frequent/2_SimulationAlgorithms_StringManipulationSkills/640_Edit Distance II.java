@@ -34,4 +34,39 @@ public class Solution {
  * 3) Delete 1 char from t
 	  s: a   b c
 	  t: a D b c
- */
+ */O(n)
+public class Solution {
+    /*
+     * @param s: a string
+     * @param t: a string
+     * @return: true if they are both one edit distance apart or false
+     */
+    public boolean isOneEditDistance(String s, String t) {
+        // write your code here
+	    if(s.length() > t.length()) {
+		    return isOneEditDistance(t, s);
+	    }
+	    int diff = t.length() - s.length();
+	
+	    if (diff > 1) {
+		    return false;
+	    }
+	    if (diff == 1) {
+	    	for (int i = 0; i < s.length(); i++) {
+		    	if (s.charAt(i) != t.charAt(i)) {
+			    	return s.substring(i).equals(t.substring(i+1));
+			    }
+		    }
+	    }
+	    if (diff == 0) {
+	      int count = 0;
+	    	for (int i = 0; i < s.length(); i++) {
+			    if (s.charAt(i) != t.charAt(i)) {
+			    	count++;
+			    }
+		    }
+		    return (count == 1);
+	    }
+    	return true;
+    }
+}
