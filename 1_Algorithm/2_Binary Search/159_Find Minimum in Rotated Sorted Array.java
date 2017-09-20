@@ -6,6 +6,9 @@ public class Solution {
     public int findMin(int[] nums) {
         //to find the first number <= last number
         //target = nums[nums.length - 1];
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }//based on the discription
         int start = 0;
         int end = nums.length - 1;
         int target = nums[nums.length - 1];
