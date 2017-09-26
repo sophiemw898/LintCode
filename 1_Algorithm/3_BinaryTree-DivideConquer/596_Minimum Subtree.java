@@ -31,7 +31,10 @@ public class Solution {
         if (root == null) {
             return 0;
         }
+        //divide and conquer and merge
         int sum = root.val + helper(root.left) + helper(root.right);
+        
+        //traverse (compare with grobal variable)
         if (sum <= min) {
             min = sum;
             res = root;
