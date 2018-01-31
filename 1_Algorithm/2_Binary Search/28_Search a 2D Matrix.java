@@ -1,40 +1,41 @@
 O (log n)
 
+     //Binary Search Once
 public class Solution {
     /*
      * @param matrix: matrix, a list of lists of integers
      * @param target: An integer
      * @return: a boolean, indicate whether matrix contains target
      */
-     
-     //Binary Search Once
     public boolean searchMatrix(int[][] matrix, int target) {
+        // write your code here
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return false;
         }
-        int r = matrix.length;
-        int c = matrix[0].length;
+        
+        int row = matrix.length;
+        int col = matrix[0].length;
+
         int start = 0;
-        int end = r * c - 1;
+        int end = row * col - 1;
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
-            int i = mid / c;
-            int j = mid % c;
-            if (matrix[i][j] == target) {
+            if (matrix[mid / col][mid % col] == target) {
                 return true;
-            } else if(matrix[i][j] > target) {
-                end = mid;
-            } else {
+            } else if (matrix[mid / col][mid % col] < target) {
                 start = mid;
+            } else {
+                end = mid;
             }
         }
-        if (matrix[start / c][start % c] == target) {
+        
+        if (matrix[start / col][start % col] == target) {
             return true;
-        }
-        if (matrix[end / c][end % c] == target) {
+        } else if (matrix[end / col][end % col] == target) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }
 
@@ -45,30 +46,31 @@ public class Solution {
      * @param target: An integer
      * @return: a boolean, indicate whether matrix contains target
      */
-     
-     //Binary Search Once
     public boolean searchMatrix(int[][] matrix, int target) {
+        // write your code here
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return false;
         }
-        int r = matrix.length;
-        int c = matrix[0].length;
+        
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        //find the row index, the last number <= target
         int start = 0;
-        int end = r  - 1;
-        int row = 0;
+        int end = row - 1;
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
             if (matrix[mid][0] == target) {
                 return true;
-            } else if (matrix[mid][0] > target) {
-                end = mid;
             } else if (matrix[mid][0] < target) {
                 start = mid;
+            } else {
+                end = mid;
             }
         }
         
-        //System.out.println(start);
-        //System.out.println(end);
+        System.out.println(start);
+        System.out.println(end);
         
         if (matrix[end][0] <= target) {
             row = end;
@@ -78,27 +80,27 @@ public class Solution {
             return false;
         }
         
-        //System.out.println(row);
+        System.out.println(row);
         
-        int left = 0;
-        int right = c - 1;
-        while (left + 1 < right) {
-            int mid = left + (right - left) / 2;
+        //find the column index, the number equal to target
+        start = 0;
+        end = col -1;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
             if (matrix[row][mid] == target) {
                 return true;
             } else if (matrix[row][mid] > target) {
-                right = mid;
+                end = mid;
             } else {
-                left = mid;
+                start = mid;
             }
         }
-        
-        if (matrix[row][left] == target) {
+        if (matrix[row][start] == target) {
             return true;
-        }
-        if (matrix[row][right] == target) {
+        } else if (matrix[row][end] == target) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }
