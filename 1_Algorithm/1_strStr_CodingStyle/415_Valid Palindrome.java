@@ -1,3 +1,9 @@
+corner case "1a123" false
+    "" true
+    ".,,//" true
+    
+    O(n)
+    
 public class Solution {
     /**
      * @param s: A string
