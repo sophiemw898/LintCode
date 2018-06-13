@@ -1,3 +1,7 @@
+O(n) O(n)
+Another way to approach this problem is identifying that a level-order traversal is very similar to the breadth-first search of a graph. A breadth-first traversal has a time complexity that is O(|V| + |E|) where |V| is the number of vertices and |E| is the number of edges.
+
+In a tree, the number of edges is around equal to the number of vertices. This makes it overall linear in the number of nodes.
 /**
  * Definition of TreeNode:
  * public class TreeNode {
