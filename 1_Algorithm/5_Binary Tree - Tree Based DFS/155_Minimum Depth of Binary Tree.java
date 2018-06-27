@@ -1,3 +1,5 @@
+// 1,#,2,3 only when root.right == null && root.left == null . the node is the leaf
+
 public class Solution {
     /**
      * @param root: The root of binary tree
