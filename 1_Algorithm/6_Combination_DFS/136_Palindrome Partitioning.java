@@ -19,8 +19,10 @@ public class Solution {
             results.add(new ArrayList<String>(partition));
             return;
         }
-        
+        //i 表示切割的位置，这里是随便切，若只能切一个或者两个单词，
+        //则加上条件i < starIndex + 2
         for (int i = startIndex; i < s.length(); i++) {
+            //单词切割成0 - i， 下一层循环的初始位置是i + 1
             String subString = s.substring(startIndex, i + 1);
             if (!isPalindrome(subString)) {
                 continue;
