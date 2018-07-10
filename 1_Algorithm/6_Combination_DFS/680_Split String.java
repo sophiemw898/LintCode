@@ -26,14 +26,21 @@ public class Solution {
             return;
         }
         
-        for (int i = 1; i < 3; i++) {
-            if (index + i <= s.length()) {
-                subset.add(s.substring(index, index + i));
-                //System.out.println(subset);
-                helper(s, index + i, results, subset);
-                subset.remove(subset.size() - 1);
-            }
+        for (int i = index; i < index + 2 && i < s.length(); i++) {
+            subset.add(s.substring(index, i + 1));
+            //System.out.println(subset);
+            helper(s, i + 1, results, subset);
+            subset.remove(subset.size() - 1);
         }
+        
+//         for (int i = 1; i < 3; i++) {
+//             if (index + i <= s.length()) {
+//                 subset.add(s.substring(index, index + i));
+//                 //System.out.println(subset);
+//                 helper(s, index + i, results, subset);
+//                 subset.remove(subset.size() - 1);
+//             }
+//         }
     }
 }
 
