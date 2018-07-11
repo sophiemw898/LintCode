@@ -1,3 +1,5 @@
+//还有一种优化的方法不太懂
+
 public class Solution {
     /*
      * @param s: A string
