@@ -55,3 +55,59 @@ public class Solution {
         return quickSelectOnTree(root.right, k - left - 1, childrenNum);
     }
 }
+
+//使用 Binary Search Tree Iterator 的方式（可以参考 binary search tree iterator 那个题）
+//用 stack，从第一个点开始，走 k-1 步，就是第 k 个点了。
+//时间复杂度是 O(h + k)O(h+k) h 是树的高度。
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+
+public class Solution {
+    /**
+     * @param root: the given BST
+     * @param k: the given k
+     * @return: the kth smallest element in BST
+     */
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack =  new Stack<>();
+        TreeNode cur = root;
+        
+        //Initialization. point to 1st node should be pop
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.left;
+        }
+        
+        //获得下一个值，只需要返回stack.peek()的值，并将stack 进行相应的变化，挪到下一个点。
+        //重复k-1次next（）指令， 第k次看到的点即为kthSmallest
+        for (int i = 0; i < k - 1; i++) {
+            //used for update stack;
+            TreeNode node = stack.peek();
+            if (node.right == null) {
+                node = stack.pop();
+                //下面条件成立说明node是在前一点的右子树上，前一个点已经写入，将其弹出
+                while (!stack.empty() && stack.peek().right == node) {
+                    node = stack.pop();
+                }
+            } else {
+                //如果当前点存在右子树，那么就是右子树中“一路向西”最左边的那个点
+                node = node.right;
+                while (node != null) {
+                    stack.add(node);
+                    node = node.left;
+                }
+            }
+        }
+        
+        return stack.peek().val;
+    }
+}
