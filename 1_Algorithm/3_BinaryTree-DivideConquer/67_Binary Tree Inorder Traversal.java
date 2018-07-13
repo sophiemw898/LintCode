@@ -60,26 +60,29 @@ public class Solution {
 
 //iterative
 public class Solution {
-    /*
+    /**
      * @param root: A Tree
      * @return: Inorder in ArrayList which contains node values.
      */
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> results = new ArrayList<>();
-        if (root == null) {
-            return results;
-        }
-        Deque<TreeNode> stack = new ArrayDeque<>();
+        List<Integer> inorder = new ArrayList<>();
+        // if (root == null) {
+        //     return inorder;
+        // }
+        
+        Stack<TreeNode> stack = new Stack<>();
         TreeNode cur = root;
-        while (cur != null || !stack.isEmpty()) {
+        
+        while(cur != null || !stack.empty()) {
             while (cur != null) {
-                stack.addFirst(cur);
+                stack.push(cur);
                 cur = cur.left;
             }
-            cur = stack.removeFirst();
-            results.add(cur.val);
+            cur = stack.pop();
+            inorder.add(cur.val);
             cur = cur.right;
         }
-        return results;
+        
+        return inorder;
     }
 }
