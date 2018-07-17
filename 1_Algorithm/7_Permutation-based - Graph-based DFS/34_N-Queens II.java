@@ -1,5 +1,5 @@
 //n-queen的改编版，就是把之前要打印出来的棋盘改成一个计数器。int[]创建一个对象，参与dfs，最后返回不同解的个数。
-
+//为什么直接另sum是一个整数就传不进去 所有的输出都是0
 public class Solution {
     /**
      * @param n: The number of queens.
