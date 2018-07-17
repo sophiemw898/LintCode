@@ -1,5 +1,58 @@
 //n-queen的改编版，就是把之前要打印出来的棋盘改成一个计数器。int[]创建一个对象，参与dfs，最后返回不同解的个数。
 //为什么直接另sum是一个整数就传不进去 所有的输出都是0
+
+public class Solution {
+    /**
+     * @param n: The number of queens.
+     * @return: The total number of distinct solutions.
+     */
+    int sum;
+    
+    public int totalNQueens(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        sum = 0;
+        helper(n, new ArrayList<Integer>());
+        return sum;
+    }
+    
+    private void helper(int n, List<Integer> cols) {
+        if (cols.size() == n) {
+            sum++;
+            return;
+        }
+        
+        for (int colIndex = 0; colIndex < n; colIndex++) {
+            if (!isValid(cols, colIndex)) {
+                continue;
+            }
+            cols.add(colIndex);
+            helper(n, cols);
+            cols.remove(cols.size() - 1);
+        }
+    }
+    
+    private boolean isValid(List<Integer> cols, int colIndex) {
+        int row = cols.size();//即将加入的点的横坐标
+        for (int i = 0; i < row; i++) {
+            //新加入的点colIndex没被访问过
+            if (cols.get(i) == colIndex) {
+                return false;
+            }
+            //斜角攻击 
+            if (i + cols.get(i) == row + colIndex) {
+                return false;
+            }
+            if (i - cols.get(i) == row - colIndex) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
 public class Solution {
     /**
      * @param n: The number of queens.
