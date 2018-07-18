@@ -69,7 +69,7 @@ public class Solution {
     private String replace(String word, char c, int i) {
         char[] chars = word.toCharArray();
         chars[i] = c;
-        String newWord = new String(chars);
+        String newWord = new String(chars);//String newWord = String.valueOf(chars);
         return newWord;
     }
 }
