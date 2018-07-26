@@ -10,11 +10,9 @@ public class Solution {
         int i = 0, j = 0;
         while (i < A.length && j < B.length) {
             if (A[i] <= B[j]) {
-                res[index++] = A[i];
-                i++;
+                res[index++] = A[i++];
             } else {
-                res[index++] = B[j];
-                j++;
+                res[index++] = B[j++];
             }
         } 
         
