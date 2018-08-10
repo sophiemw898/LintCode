@@ -1,3 +1,45 @@
+// 使用 Manancher's Algorithm，可以在 O(n) 的时间内解决问题 还没写
+// 参考资料：https://www.felix021.com/blog/read.php?2040
+
+//基于中心点枚举的算法，时间复杂度 O(n^2) 空间O（1）
+public class Solution {
+    /**
+     * @param s: input string
+     * @return: the longest palindromic substring
+     */
+    public String longestPalindrome(String s) {
+        if (s == null && s.length() == 0) {
+            return "";
+        }
+        
+        int start = 0, maxLen = 0; 
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = longestPalindromeFrom(s, i, i);
+            int len2 = longestPalindromeFrom(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > maxLen) {
+                start = i - (len - 1) / 2;//i present the central point
+                maxLen = len;
+            }
+        }
+        
+        return s.substring(start, start + maxLen);
+    }
+    
+    private int longestPalindromeFrom(String s, int i, int j) {
+        int left = i, right = j;
+        while (left >= 0 && right < s.length()) {
+            if (s.charAt(left) != s.charAt(right)) {
+                break;
+            }
+            left--;
+            right++;
+        }
+        
+        return right - left - 1;
+    }
+}
+
 //dp O(n^2) time O(n^2) space
 public class Solution {
     /**
