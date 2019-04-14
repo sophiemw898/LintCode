@@ -13,26 +13,41 @@ public class Solution {
         String res = "";
         int interval = numRows + numRows - 2;
         
-        //first row
-        for (int i = 0; i < s.length(); i += interval) {
-            res += s.charAt(i);
-        }
-        
-        //middle part
-        for (int i = 1; i < numRows - 1; i++) {
+        //combine all rows together
+        for (int i = 0; i < numRows; i++) {
             for (int j = i; j < s.length(); j += interval) {
                 res += s.charAt(j);
-                if (j + (interval - 2 * i) < s.length()) {
+                //the last two limitation is for first and last rows
+                if (j + (interval - 2 * i) < s.length() 
+                    && interval - 2 * i > 0
+                    && interval - 2 * i < interval) {
                     res += s.charAt(j + (interval - 2 * i) );
                 }
             }
         }
-        
-        //last row
-        for (int i = numRows - 1; i < s.length(); i += interval) {
-            res += s.charAt(i);
-        }
-        
+      
         return res;
+        
+        
+        // //first row
+        // for (int i = 0; i < s.length(); i += interval) {
+        //     res += s.charAt(i);
+        // }
+        
+        // //middle part
+        // for (int i = 1; i < numRows - 1; i++) {
+        //     for (int j = i; j < s.length(); j += interval) {
+        //         res += s.charAt(j);
+        //         if (j + (interval - 2 * i) < s.length()) {
+        //             res += s.charAt(j + (interval - 2 * i) );
+        //         }
+        //     }
+        // }
+        
+        // //last row
+        // for (int i = numRows - 1; i < s.length(); i += interval) {
+        //     res += s.charAt(i);
+        // }
+     
     }
 }
