@@ -1,0 +1,53 @@
+/**
+ * Definition of ParentTreeNode:
+ * 
+ * class ParentTreeNode {
+ *     public ParentTreeNode parent, left, right;
+ * }
+ */
+
+
+public class Solution {
+    /*
+     * @param root: The root of the tree
+     * @param A: node in the tree
+     * @param B: node in the tree
+     * @return: The lowest common ancestor of A and B
+     */
+    public ParentTreeNode lowestCommonAncestorII(ParentTreeNode root, ParentTreeNode A, ParentTreeNode B) {
+        //将两个结点移动到相同的高度，然后同时向上移动，直到移动到相同的点
+        ArrayList<ParentTreeNode> pathA = findPath(A);
+        ArrayList<ParentTreeNode> pathB = findPath(B);
+        //pathA : A C D root
+        //pathB : B D root
+        int indexA = pathA.size() - 1;
+        int indexB = pathB.size() - 1;
+        
+        ParentTreeNode lowestCommonAncestor = null;
+        
+        while (indexA >= 0 && indexB >= 0) {
+            if (pathA.get(indexA) != pathB.get(indexB)) {
+                //{1,#,2,#,3,#,4,#,5} 3, 5 wrong
+                //lowestCommonAncestor = pathB.get(indexB + 1);
+                break;
+            }
+            //从root开始不断更新当前LCA 直到break返回
+            lowestCommonAncestor = pathB.get(indexB);
+            indexA--;
+            indexB--;
+        }
+        
+        return lowestCommonAncestor;
+    }
+    
+    //find path thr root to node
+    private ArrayList<ParentTreeNode> findPath(ParentTreeNode node) {
+        ArrayList<ParentTreeNode> path = new ArrayList<>();
+        while (node != null) {
+            path.add(node);
+            node = node.parent;
+        }
+        
+        return path;
+    }
+}
