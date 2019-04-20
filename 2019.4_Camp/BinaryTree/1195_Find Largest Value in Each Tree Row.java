@@ -45,3 +45,38 @@ public class Solution {
 }
 
 //BFS
+
+public class Solution {
+    /**
+     * @param root: a root of integer
+     * @return: return a list of integer
+     */
+    public List<Integer> largestValues(TreeNode root) {
+        // BFS
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            int max = Integer.MIN_VALUE;
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                max = Math.max(max, node.val);
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            result.add(max);
+        }
+        
+        return result;
+    }
+}
