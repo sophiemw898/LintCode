@@ -1,3 +1,31 @@
+
+public class Solution {
+    /**
+     * @param root: the root
+     * @return: the tilt of the whole tree
+     */
+    // 需要随时计算当前节点的和 helper()
+    int res = 0;
+    public int findTilt(TreeNode root) {
+        // Write your code here
+        helper(root);
+        return res;
+    }
+    
+    //use helper() to count sum of all subtree node valus
+    private int helper(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        
+        int left = helper(root.left);
+        int right = helper(root.right);
+        
+        res += Math.abs(right - left);
+        return left + right + root.val;
+    }
+}
+
 /**
  * Definition of TreeNode:
  * public class TreeNode {
