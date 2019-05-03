@@ -1,3 +1,4 @@
+//siftDown O(n)
 public class Solution {
     /*
      * @param A: Given an integer array
@@ -10,7 +11,7 @@ public class Solution {
         }
     }
     
-    //下移操作，变成堆
+    //下移操作，变成堆O(1)
     private void siftDonw(int[] A, int k) {
         int n = A.length;
         while (k < n) {
@@ -34,6 +35,35 @@ public class Solution {
             A[k] = temp;
             
             k = minIndex;
+        }
+    }
+}
+
+//siftUp O(nlogn) 冒泡排序
+public class Solution {
+    /*
+     * @param A: Given an integer array
+     * @return: nothing
+     */
+    public void heapify(int[] A) {
+        for (int i = 0; i < A.length; i++) {
+            siftUp(A, i);
+        }
+    }
+    
+    //siftUP一次的时间是O(logn)
+    private void siftUp(int[] A, int k) {
+        while (k != 0) {
+            int father = (k - 1) / 2;
+            if (A[father] < A[k]) {
+                break;
+            }
+            
+            int temp = A[father];
+            A[father] = A[k];
+            A[k] = temp;
+            
+            k = father;
         }
     }
 }
