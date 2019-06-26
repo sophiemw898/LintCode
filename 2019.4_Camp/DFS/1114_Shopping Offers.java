@@ -1,3 +1,57 @@
+//易懂的dfs写法
+public class Solution {
+    /**
+     * @param price: List[int]
+     * @param special: List[List[int]]
+     * @param needs: List[int]
+     * @return: return an integer
+     */
+    public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List<Integer> needs) {
+        Map<List<Integer>, Integer> memo = new HashMap<>();
+        return dfs(price, special, needs, 0, memo);
+    }
+    
+    //helper返回得到needs的最小花费 同时记录在memo里面
+    private int dfs(List<Integer> price, List<List<Integer>> special, List<Integer> needs, int pos, Map<List<Integer>, Integer> memo) {
+        //计算过同样的needs，返回即可
+        if (memo.containsKey(needs)) {
+            return memo.get(needs);
+        }
+        
+        int minCost = directBuy(price, needs);
+        for (int i = pos; i < special.size(); i++) {
+            List<Integer> offer = special.get(i);
+            List<Integer> tempNeeds = new ArrayList<>();
+            //check if current offer is valid
+            for (int j = 0; j < offer.size() - 1; j++) {
+                if (needs.get(j) < offer.get(j)) {
+                    tempNeeds = null;
+                    break;
+                }
+                tempNeeds.add(needs.get(j) - offer.get(j));
+            }
+            
+            //use the current offer and try next 
+            if (tempNeeds != null) {
+                minCost = Math.min(minCost, 
+                offer.get(offer.size() - 1) + dfs(price, special, tempNeeds, i, memo));
+            }
+        }
+        
+        //update minCost to memo
+        memo.put(needs, minCost);
+        return minCost;
+    }
+    
+    private int directBuy(List<Integer> price, List<Integer> needs) {
+        int cost = 0;
+        for (int i = 0; i < price.size(); i++) {
+            cost += price.get(i) * needs.get(i);
+        }
+        return cost;
+    }
+}
+
 public class Solution {
     /**
      * @param price: List[int]
