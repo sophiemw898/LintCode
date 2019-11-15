@@ -34,6 +34,10 @@ public class Solution {
                             
                             for (int i = startIndex; i < nums.length; i++) {
                                 //i- 1 没选， 若i同i- 1相同，则同样不选
+                                
+                                //i > Index means 
+                                //上一轮是index - 1, 当前是i， i - （index - 1）>= 1,
+                                //两者之间至少有一个数， 所以i- 1 没放入，所以i与i- 1相等的时候也不能放入
                                 if (i > startIndex && nums[i] == nums[i - 1]) {
                                     continue;
                                 }
